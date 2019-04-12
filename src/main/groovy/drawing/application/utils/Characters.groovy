@@ -1,4 +1,4 @@
-package drawing.application
+package drawing.application.utils
 
 class Characters {
     static final EMPTY = ''

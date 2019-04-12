@@ -2,8 +2,8 @@ package drawing.domain
 
 import groovy.transform.EqualsAndHashCode
 
-import static drawing.application.Characters.*
-import static drawing.application.StringUtils.format
+import static drawing.application.utils.Characters.*
+import static drawing.application.utils.StringUtils.format
 
 @EqualsAndHashCode
 class Canvas {

@@ -2,7 +2,7 @@ package drawing.domain
 
 import spock.lang.Specification
 
-import static drawing.application.StringUtils.format
+import static drawing.application.utils.StringUtils.format
 
 class CanvasSpec extends Specification {
 
