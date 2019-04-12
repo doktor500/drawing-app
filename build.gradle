@@ -1,0 +1,17 @@
+plugins {
+    id 'groovy'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation     group: 'org.codehaus.groovy', name: 'groovy-all',  version: '2.5.4'
+
+    testImplementation group: 'org.spockframework',  name: 'spock-core',  version: '1.2-groovy-2.5'
+    testImplementation group: 'cglib',               name: 'cglib-nodep', version: '3.2.10'
+}
+
+mainClassName = 'drawing.App'
