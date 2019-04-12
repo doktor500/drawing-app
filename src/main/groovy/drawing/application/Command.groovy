@@ -1,5 +1,5 @@
 package drawing.application
 
-interface Command {
-    void execute()
+interface Command<TYPE> {
+    TYPE execute()
 }

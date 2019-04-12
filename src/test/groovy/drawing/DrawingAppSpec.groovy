@@ -6,20 +6,17 @@ import spock.lang.Specification
 
 class DrawingAppSpec extends Specification {
 
-    void 'creates an empty canvas'() {
+    void 'draws an empty canvas'() {
         given:
         def console = Mock(Console)
         def app = new DrawingApp(console: console)
-        def command = new CreateCanvasCommand(width: width, height: height)
+        def command = new CreateCanvasCommand(width: 0, height: 0)
 
         when:
         app.process(command)
+        app.print()
 
         then:
         1 * console.print('')
-
-        where:
-        width | height
-        0     | 0
     }
 }
