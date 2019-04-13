@@ -5,7 +5,7 @@ import groovy.transform.TupleConstructor
 
 @EqualsAndHashCode
 @TupleConstructor
-class Colour {
+class ColourPoint {
     Coordinate coordinate
-    String value
+    String colour
 }

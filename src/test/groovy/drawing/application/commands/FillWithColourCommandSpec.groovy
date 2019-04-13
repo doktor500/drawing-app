@@ -1,6 +1,6 @@
 package drawing.application.commands
 
-import drawing.domain.Colour
+import drawing.domain.ColourPoint
 import drawing.domain.Coordinate
 import spock.lang.Specification
 
@@ -10,9 +10,9 @@ class FillWithColourCommandSpec extends Specification {
         given:
         def coordinate = new Tuple(1, 1)
         def colour = 'o'
-        def expectedColour = new Colour(new Coordinate(0, 0), colour)
+        def expectedColourPoint = new ColourPoint(new Coordinate(0, 0), colour)
 
         expect:
-        new FillWithColourCommand(coordinate: coordinate, colour: colour).execute() == expectedColour
+        new FillWithColourCommand(coordinate: coordinate, colour: colour).execute() == expectedColourPoint
     }
 }

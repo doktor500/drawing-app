@@ -10,8 +10,8 @@ import drawing.infrastructure.Console
 
 class DrawingApp {
 
-    private Canvas canvas
-    private Console console
+    Canvas canvas
+    Console console
 
     void process(DrawCanvasCommand command) {
         canvas = command.execute()
@@ -19,17 +19,17 @@ class DrawingApp {
 
     void process(DrawLineCommand command) {
         def line = command.execute()
-        canvas = canvas.drawLine(line)
+        canvas = canvas.draw(line)
     }
 
     void process(DrawRectangleCommand command) {
         def rectangle = command.execute()
-        canvas = canvas.drawRectangle(rectangle)
+        canvas = canvas.draw(rectangle)
     }
 
     void process(FillWithColourCommand command) {
-        def colour = command.execute()
-        canvas = canvas.fillWithColour(colour)
+        def colourPoint = command.execute()
+        canvas = canvas.fill(colourPoint.coordinate, colourPoint.colour)
     }
 
     void print() {

@@ -16,7 +16,7 @@ class CanvasSpec extends Specification {
         def line = new Line(new Coordinate(0, 0), new Coordinate(0, 0))
 
         when:
-        def newCanvas = canvas.drawLine(line)
+        def newCanvas = canvas.draw(line)
 
         then:
         newCanvas.matrix == [['X']]
@@ -28,7 +28,7 @@ class CanvasSpec extends Specification {
         def line = new Line(new Coordinate(0, 0), new Coordinate(2, 0))
 
         when:
-        def newCanvas = canvas.drawLine(line)
+        def newCanvas = canvas.draw(line)
 
         then:
         newCanvas.matrix == [
@@ -48,7 +48,7 @@ class CanvasSpec extends Specification {
         ] as Set)
 
         when:
-        def newCanvas = canvas.drawRectangle(rectangle)
+        def newCanvas = canvas.draw(rectangle)
 
         then:
         newCanvas.matrix == [
@@ -62,10 +62,11 @@ class CanvasSpec extends Specification {
     void 'fills empty canvas with colour'() {
         given:
         def canvas = new Canvas(5, 3)
-        def colour = new Colour(new Coordinate(3, 0), 'o')
+        def coordinate = new Coordinate(0, 0)
+        def colour = 'o'
 
         when:
-        def newCanvas = canvas.fillWithColour(colour)
+        def newCanvas = canvas.fill(coordinate, colour)
 
         then:
         newCanvas.matrix == [
@@ -75,4 +76,20 @@ class CanvasSpec extends Specification {
         ]
     }
 
+    void 'fills canvas that contains a line with colour'() {
+        def canvas = new Canvas(5, 3)
+        def line = new Line(new Coordinate(0, 0), new Coordinate(2, 0))
+        def coordinate = new Coordinate(3, 1)
+        def colour = 'o'
+
+        when:
+        def newCanvas = canvas.draw(line).fill(coordinate, colour)
+
+        then:
+        newCanvas.matrix == [
+            ['X', 'X', 'X', 'o', 'o'],
+            ['o', 'o', 'o', 'o', 'o'],
+            ['o', 'o', 'o', 'o', 'o']
+        ]
+    }
 }

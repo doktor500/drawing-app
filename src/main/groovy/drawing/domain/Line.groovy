@@ -10,7 +10,9 @@ class Line {
     Coordinate origin
     Coordinate destination
 
-    boolean contains(Coordinate coordinate) {
-        coordinate.x in (origin.x..destination.x) && coordinate.y in (origin.y..destination.y)
+    Set getCoordinates() {
+        (origin.x .. destination.x).collectMany { x->
+            (origin.y .. destination.y).collect { y -> new Coordinate(x, y) }
+        }
     }
 }
