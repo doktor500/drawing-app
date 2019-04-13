@@ -38,8 +38,8 @@ class Canvas {
     }
 
     private List createNewMatrix(Line line) {
-        (1..height).collect { column ->
-            (1..width).collect { row -> line.contains(new Coordinate(row, column)) ? NOT_EMPTY : SPACE }
+        (0..height - 1).collect { row ->
+            (0..width - 1).collect { column -> line.contains(toCoordinate(row, column)) ? CROSS : matrix[row][column] }
         }
     }
 
@@ -47,6 +47,10 @@ class Canvas {
         (0..height - 1).collect {
             (0..width - 1).collect { SPACE }
         }
+    }
+
+    private Coordinate toCoordinate(Integer row, Integer column) {
+        new Coordinate(column + 1, row + 1)
     }
 
 }

@@ -58,4 +58,25 @@ class DrawingAppFunctionalSpec extends Specification {
             ----------------------
         """))
     }
+
+    void 'draws multiple lines'() {
+        given:
+        def coordinate1 = new Tuple(6, 3)
+        def coordinate2 = new Tuple(6, 4)
+        def command = new DrawLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+
+        when:
+        app.process(command)
+        app.print()
+
+        then:
+        1 * console.print(format("""
+            ----------------------
+            |                    |
+            |XXXXXX              |
+            |     X              |
+            |     X              |
+            ----------------------
+        """))
+    }
 }
