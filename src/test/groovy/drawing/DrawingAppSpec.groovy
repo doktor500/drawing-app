@@ -1,6 +1,6 @@
 package drawing
 
-import drawing.application.CreateCanvasCommand
+import drawing.application.commands.CreateCanvasCommand
 import drawing.infrastructure.Console
 import spock.lang.Specification
 

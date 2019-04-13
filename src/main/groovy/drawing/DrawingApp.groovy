@@ -1,19 +1,19 @@
 package drawing
 
-import drawing.application.CreateCanvasCommand
-import drawing.domain.Canvas
+import drawing.application.commands.CreateCanvasCommand
+import drawing.application.presenters.CanvasPresenter
 import drawing.infrastructure.Console
 
 class DrawingApp {
 
-    private Canvas canvas
+    private CanvasPresenter canvas
     private Console console
 
     void process(CreateCanvasCommand command) {
-        canvas = command.execute()
+        canvas = command.execute() as CanvasPresenter
     }
 
     void print() {
-        console.print(canvas.toString())
+        console.print(canvas.present())
     }
 }

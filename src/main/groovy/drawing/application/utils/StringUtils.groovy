@@ -1,5 +1,7 @@
 package drawing.application.utils
 
+import drawing.domain.Characters
+
 class StringUtils {
 
     static format(String text) {

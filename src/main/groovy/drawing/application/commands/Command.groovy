@@ -1,4 +1,4 @@
-package drawing.application
+package drawing.application.commands
 
 interface Command<TYPE> {
     TYPE execute()

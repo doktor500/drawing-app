@@ -2,18 +2,16 @@ package drawing.domain
 
 import groovy.transform.EqualsAndHashCode
 
-import static drawing.application.utils.Characters.*
-import static drawing.application.utils.StringUtils.format
+import static Characters.*
 
 @EqualsAndHashCode
 class Canvas {
 
-    private static final EMPTY_MATRIX = [[]]
+    private static final List EMPTY_MATRIX = [[]]
 
-    private Integer width = 0
-    private Integer height = 0
-
-    private List matrix = EMPTY_MATRIX
+    Integer width = 0
+    Integer height = 0
+    List matrix = EMPTY_MATRIX
 
     Canvas() {
 
@@ -25,39 +23,14 @@ class Canvas {
         this.matrix = isEmpty() ? EMPTY_MATRIX : initCanvas()
     }
 
-    String toString() {
-        isEmpty() ? EMPTY : format(printCanvas())
-    }
-
-    private isEmpty() {
+    boolean isEmpty() {
         width == 0 && height == 0
-    }
-
-    // TODO Move to a presenter
-    private printCanvas() {
-        """
-            ${printEdgeRow()}
-            ${printMatrix()}
-            ${printEdgeRow()}
-        """
     }
 
     private initCanvas() {
         (0..width - 1).collect {
             (0..height - 1).collect { SPACE }
         }
-    }
-
-    private printMatrix() {
-        (0..width - 1).collect { row -> printRow(row) }.join(NEW_LINE)
-    }
-
-    private printRow(Integer row) {
-        PIPE + (0..height - 1).collect { column -> matrix[row][column] }.join() + PIPE
-    }
-
-    private printEdgeRow() {
-        (0..width + 1).collect { SEPARATOR }.join()
     }
 
 }
