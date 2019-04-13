@@ -1,7 +1,8 @@
 package drawing
 
-import drawing.application.commands.CreateCanvasCommand
+import drawing.application.commands.DrawCanvasCommand
 import drawing.application.commands.DrawLineCommand
+import drawing.application.commands.DrawRectangleCommand
 import drawing.infrastructure.Console
 import spock.lang.Shared
 import spock.lang.Specification
@@ -21,7 +22,7 @@ class DrawingAppFunctionalSpec extends Specification {
 
     void 'draws a canvas'() {
         given:
-        def command = new CreateCanvasCommand(width: 20, height: 4)
+        def command = new DrawCanvasCommand(width: 20, height: 4)
 
         when:
         app.process(command)
@@ -75,6 +76,27 @@ class DrawingAppFunctionalSpec extends Specification {
             |                    |
             |XXXXXX              |
             |     X              |
+            |     X              |
+            ----------------------
+        """))
+    }
+
+    void 'draws a rectangle'() {
+        given:
+        def coordinate1 = new Tuple(16, 1)
+        def coordinate2 = new Tuple(20, 3)
+        def command = new DrawRectangleCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+
+        when:
+        app.process(command)
+        app.print()
+
+        then:
+        1 * console.print(format("""
+            ----------------------
+            |               XXXXX|
+            |XXXXXX         X   X|
+            |     X         XXXXX|
             |     X              |
             ----------------------
         """))
