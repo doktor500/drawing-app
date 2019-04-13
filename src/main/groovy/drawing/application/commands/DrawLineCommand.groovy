@@ -10,8 +10,8 @@ class DrawLineCommand implements Command<Line> {
 
     @Override
     Line execute() {
-        def origin = new Coordinate(x: coordinate1.first(), y: coordinate1.last())
-        def destination = new Coordinate(x: coordinate2.first(), y: coordinate2.last())
+        def origin = new Coordinate(x: coordinate1.first() - 1, y: coordinate1.last() - 1)
+        def destination = new Coordinate(x: coordinate2.first() - 1, y: coordinate2.last() - 1)
         new Line(origin: origin, destination: destination)
     }
 }

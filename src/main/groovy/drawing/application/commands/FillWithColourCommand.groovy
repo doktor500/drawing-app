@@ -10,6 +10,6 @@ class FillWithColourCommand implements Command<Colour> {
 
     @Override
     Colour execute() {
-        new Colour(coordinate: new Coordinate(x: coordinate.first(), y: coordinate.last()), value: colour)
+        new Colour(coordinate: new Coordinate(x: coordinate.first() - 1, y: coordinate.last() - 1), value: colour)
     }
 }

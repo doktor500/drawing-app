@@ -18,10 +18,10 @@ class DrawRectangleCommandSpec extends Specification {
 
         where:
         expectedRectangle = new Rectangle([
-            new Line(new Coordinate(16, 1), new Coordinate(16, 3)),
-            new Line(new Coordinate(16, 1), new Coordinate(20, 1)),
-            new Line(new Coordinate(20, 1), new Coordinate(20, 3)),
-            new Line(new Coordinate(16, 3), new Coordinate(20, 3))
+            new Line(new Coordinate(15, 0), new Coordinate(15, 2)),
+            new Line(new Coordinate(15, 0), new Coordinate(19, 0)),
+            new Line(new Coordinate(19, 0), new Coordinate(19, 2)),
+            new Line(new Coordinate(15, 2), new Coordinate(19, 2))
         ] as Set)
     }
 }

@@ -10,7 +10,7 @@ class FillWithColourCommandSpec extends Specification {
         given:
         def coordinate = new Tuple(1, 1)
         def colour = 'o'
-        def expectedColour = new Colour(new Coordinate(1, 1), colour)
+        def expectedColour = new Colour(new Coordinate(0, 0), colour)
 
         expect:
         new FillWithColourCommand(coordinate: coordinate, colour: colour).execute() == expectedColour

@@ -38,7 +38,7 @@ class Canvas {
     }
 
     Canvas fillWithColour(Colour colour) {
-        this //TODO Implement
+        new Canvas(width, height, initCanvas(colour.value))
     }
 
     boolean isEmpty() {
@@ -51,14 +51,14 @@ class Canvas {
         }
     }
 
-    private List initCanvas() {
+    private List initCanvas(String value = SPACE) {
         (0..height - 1).collect {
-            (0..width - 1).collect { SPACE }
+            (0..width - 1).collect { value }
         }
     }
 
     private Coordinate toCoordinate(Integer row, Integer column) {
-        new Coordinate(column + 1, row + 1)
+        new Coordinate(column, row)
     }
 
 }

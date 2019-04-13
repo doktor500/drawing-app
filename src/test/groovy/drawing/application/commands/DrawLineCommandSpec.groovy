@@ -16,6 +16,6 @@ class DrawLineCommandSpec extends Specification {
         command.execute() == expectedLine
 
         where:
-        expectedLine = new Line(new Coordinate(1, 2), new Coordinate(6, 2))
+        expectedLine = new Line(new Coordinate(0, 1), new Coordinate(5, 1))
     }
 }
