@@ -1,14 +1,17 @@
 package drawing.application.presenters
 
+import drawing.domain.Canvas
 
-import static drawing.domain.Characters.*
 import static drawing.application.utils.StringUtils.format
+import static drawing.domain.Characters.*
 
 trait CanvasPresenter {
 
     abstract Integer getWidth()
     abstract Integer getHeight()
     abstract List getMatrix()
+
+    abstract Canvas drawLine()
     abstract boolean isEmpty()
 
     String present() {
@@ -28,7 +31,7 @@ trait CanvasPresenter {
     }
 
     private printRow(Integer column) {
-        PIPE + (0..width - 1).collect { row -> matrix[row][column] }.join() + PIPE
+        PIPE + (0..width - 1).collect { row -> matrix[column][row] }.join() + PIPE
     }
 
     private printEdgeRow() {
