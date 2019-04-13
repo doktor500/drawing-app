@@ -33,6 +33,14 @@ class Canvas {
         new Canvas(width, height, createNewMatrix(line))
     }
 
+    Canvas drawRectangle(Rectangle rectangle) {
+        rectangle.lines.inject(this) { canvas, line -> canvas.drawLine(line) }
+    }
+
+    Canvas fillWithColour(Colour colour) {
+        this //TODO Implement
+    }
+
     boolean isEmpty() {
         width == 0 && height == 0
     }

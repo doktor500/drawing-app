@@ -37,4 +37,26 @@ class CanvasSpec extends Specification {
         ]
     }
 
+    void 'draws a rectangle in a canvas'() {
+        given:
+        def canvas = new Canvas(20, 4)
+        def rectangle = new Rectangle([
+            new Line(new Coordinate(16, 1), new Coordinate(16, 3)),
+            new Line(new Coordinate(16, 1), new Coordinate(20, 1)),
+            new Line(new Coordinate(20, 1), new Coordinate(20, 3)),
+            new Line(new Coordinate(16, 3), new Coordinate(20, 3))
+        ] as Set)
+
+        when:
+        def newCanvas = canvas.drawRectangle(rectangle)
+
+        then:
+        newCanvas.matrix == [
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'X', 'X', 'X', 'X'],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', ' ', ' ', ' ', 'X'],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X', 'X', 'X', 'X', 'X'],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
+    }
+
 }

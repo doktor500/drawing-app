@@ -1,6 +1,5 @@
 package drawing.application.presenters
 
-import drawing.domain.Canvas
 
 import static drawing.application.utils.StringUtils.format
 import static drawing.domain.Characters.*
@@ -10,8 +9,6 @@ trait CanvasPresenter {
     abstract Integer getWidth()
     abstract Integer getHeight()
     abstract List getMatrix()
-
-    abstract Canvas drawLine()
     abstract boolean isEmpty()
 
     String present() {
