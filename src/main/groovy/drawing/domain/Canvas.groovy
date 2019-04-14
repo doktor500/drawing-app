@@ -42,9 +42,9 @@ class Canvas {
         }
     }
 
-    private List createNewMatrix(Set coordinates, String value = CROSS) {
+    private List createNewMatrix(Set coordinates) {
         (0..<height).collect { row ->
-            (0..<width).collect { column -> (new Coordinate(column, row) in coordinates) ? value : matrix[row][column] }
+            (0..<width).collect { column -> (new Coordinate(column, row) in coordinates) ? CROSS : matrix[row][column] }
         }
     }
 

@@ -1,6 +1,5 @@
 package drawing.application.presenters
 
-
 import static drawing.application.utils.StringUtils.format
 import static drawing.domain.Characters.*
 
