@@ -1,10 +1,10 @@
 package drawing.infrastructure
 
 import drawing.DrawingApp
-import drawing.application.commands.DrawCanvasCommand
-import drawing.application.commands.DrawLineCommand
-import drawing.application.commands.DrawRectangleCommand
-import drawing.application.commands.FillWithColourCommand
+import drawing.application.commands.CreateCanvasCommand
+import drawing.application.commands.CreateLineCommand
+import drawing.application.commands.CreateRectangleCommand
+import drawing.application.commands.CreateColourCommand
 import picocli.CommandLine
 import picocli.CommandLine.Command
 import picocli.CommandLine.Parameters
@@ -36,7 +36,7 @@ class Cli {
         @Parameters(index = '1') Integer height
 
         void run() {
-            def command = new DrawCanvasCommand(width: width, height: height)
+            def command = new CreateCanvasCommand(width: width, height: height)
             println(app.process(command))
         }
     }
@@ -52,7 +52,7 @@ class Cli {
         void run() {
             def coordinate1 = new Tuple(coordinate1X, coordinate1Y)
             def coordinate2 = new Tuple(coordinate2X, coordinate2Y)
-            def command = new DrawLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+            def command = new CreateLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
             println(app.process(command))
         }
     }
@@ -62,7 +62,7 @@ class Cli {
         void run() {
             def coordinate1 = new Tuple(coordinate1X, coordinate1Y)
             def coordinate2 = new Tuple(coordinate2X, coordinate2Y)
-            def command = new DrawRectangleCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+            def command = new CreateRectangleCommand(coordinate1: coordinate1, coordinate2: coordinate2)
             println(app.process(command))
         }
     }
@@ -76,7 +76,7 @@ class Cli {
 
         void run() {
             def coordinate = new Tuple(x, y)
-            def command = new FillWithColourCommand(coordinate: coordinate, colour: colour)
+            def command = new CreateColourCommand(coordinate: coordinate, colour: colour)
             println(app.process(command))
         }
     }

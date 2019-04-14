@@ -3,7 +3,7 @@ package drawing.application.commands
 import drawing.domain.Coordinate
 import drawing.domain.Line
 
-class DrawLineCommand implements Command<Line> {
+class CreateLineCommand implements Command<Line> {
 
     Tuple<Integer> coordinate1
     Tuple<Integer> coordinate2

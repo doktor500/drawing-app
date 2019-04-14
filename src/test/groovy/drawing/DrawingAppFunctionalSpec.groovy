@@ -1,9 +1,9 @@
 package drawing
 
-import drawing.application.commands.DrawCanvasCommand
-import drawing.application.commands.DrawLineCommand
-import drawing.application.commands.DrawRectangleCommand
-import drawing.application.commands.FillWithColourCommand
+import drawing.application.commands.CreateCanvasCommand
+import drawing.application.commands.CreateLineCommand
+import drawing.application.commands.CreateRectangleCommand
+import drawing.application.commands.CreateColourCommand
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Stepwise
@@ -17,7 +17,7 @@ class DrawingAppFunctionalSpec extends Specification {
 
     void 'draws a canvas'() {
         given:
-        def command = new DrawCanvasCommand(width: 20, height: 4)
+        def command = new CreateCanvasCommand(width: 20, height: 4)
 
         expect:
         app.process(command) == format("""
@@ -34,7 +34,7 @@ class DrawingAppFunctionalSpec extends Specification {
         given:
         def coordinate1 = new Tuple(1, 2)
         def coordinate2 = new Tuple(6, 2)
-        def command = new DrawLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+        def command = new CreateLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
 
         expect:
         app.process(command) == format("""
@@ -51,7 +51,7 @@ class DrawingAppFunctionalSpec extends Specification {
         given:
         def coordinate1 = new Tuple(6, 3)
         def coordinate2 = new Tuple(6, 4)
-        def command = new DrawLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+        def command = new CreateLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
 
         expect:
         app.process(command) == format("""
@@ -68,7 +68,7 @@ class DrawingAppFunctionalSpec extends Specification {
         given:
         def coordinate1 = new Tuple(16, 1)
         def coordinate2 = new Tuple(20, 3)
-        def command = new DrawRectangleCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+        def command = new CreateRectangleCommand(coordinate1: coordinate1, coordinate2: coordinate2)
 
         expect:
         app.process(command) == format("""
@@ -85,7 +85,7 @@ class DrawingAppFunctionalSpec extends Specification {
         given:
         def coordinate = new Tuple(10, 3)
         def colour = 'o'
-        def command = new FillWithColourCommand(coordinate: coordinate, colour: colour)
+        def command = new CreateColourCommand(coordinate: coordinate, colour: colour)
 
         expect:
         app.process(command) == format("""

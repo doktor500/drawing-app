@@ -4,7 +4,7 @@ import drawing.domain.ColourPoint
 import drawing.domain.Coordinate
 import spock.lang.Specification
 
-class FillWithColourCommandSpec extends Specification {
+class CreateColourCommandSpec extends Specification {
 
     void 'creates a new colour'() {
         given:
@@ -13,6 +13,6 @@ class FillWithColourCommandSpec extends Specification {
         def expectedColourPoint = new ColourPoint(new Coordinate(0, 0), colour)
 
         expect:
-        new FillWithColourCommand(coordinate: coordinate, colour: colour).execute() == expectedColourPoint
+        new CreateColourCommand(coordinate: coordinate, colour: colour).execute() == expectedColourPoint
     }
 }

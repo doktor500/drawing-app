@@ -4,7 +4,7 @@ import drawing.domain.Coordinate
 import drawing.domain.Line
 import drawing.domain.Rectangle
 
-class DrawRectangleCommand implements Command<Rectangle> {
+class CreateRectangleCommand implements Command<Rectangle> {
 
     Tuple<Integer> coordinate1
     Tuple<Integer> coordinate2

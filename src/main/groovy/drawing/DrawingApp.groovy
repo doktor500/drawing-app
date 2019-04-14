@@ -1,9 +1,9 @@
 package drawing
 
-import drawing.application.commands.DrawCanvasCommand
-import drawing.application.commands.DrawLineCommand
-import drawing.application.commands.DrawRectangleCommand
-import drawing.application.commands.FillWithColourCommand
+import drawing.application.commands.CreateCanvasCommand
+import drawing.application.commands.CreateLineCommand
+import drawing.application.commands.CreateRectangleCommand
+import drawing.application.commands.CreateColourCommand
 import drawing.application.presenters.CanvasPresenter
 import drawing.domain.Canvas
 
@@ -11,21 +11,21 @@ class DrawingApp {
 
     Canvas canvas = new Canvas()
 
-    String process(DrawCanvasCommand createCanvas) {
+    String process(CreateCanvasCommand createCanvas) {
         run { canvas = createCanvas.execute() }
     }
 
-    String process(DrawLineCommand createLine) {
+    String process(CreateLineCommand createLine) {
         run { canvas = canvas.draw(createLine.execute()) }
     }
 
-    String process(DrawRectangleCommand createRectangle) {
+    String process(CreateRectangleCommand createRectangle) {
         run { canvas = canvas.draw(createRectangle.execute()) }
     }
 
-    String process(FillWithColourCommand createColourPoint) {
+    String process(CreateColourCommand createColour) {
         run {
-            def colourPoint = createColourPoint.execute()
+            def colourPoint = createColour.execute()
             canvas = canvas.fill(colourPoint.coordinate, colourPoint.colour)
         }
     }
