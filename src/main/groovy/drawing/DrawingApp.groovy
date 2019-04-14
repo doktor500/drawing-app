@@ -6,34 +6,32 @@ import drawing.application.commands.DrawRectangleCommand
 import drawing.application.commands.FillWithColourCommand
 import drawing.application.presenters.CanvasPresenter
 import drawing.domain.Canvas
-import drawing.infrastructure.Console
 
 class DrawingApp {
 
-    Canvas canvas
-    Console console
+    Canvas canvas = new Canvas()
 
-    void process(DrawCanvasCommand command) {
-        canvas = command.execute()
+    String process(DrawCanvasCommand createCanvas) {
+        run { canvas = createCanvas.execute() }
     }
 
-    void process(DrawLineCommand command) {
-        def line = command.execute()
-        canvas = canvas.draw(line)
+    String process(DrawLineCommand createLine) {
+        run { canvas = canvas.draw(createLine.execute()) }
     }
 
-    void process(DrawRectangleCommand command) {
-        def rectangle = command.execute()
-        canvas = canvas.draw(rectangle)
+    String process(DrawRectangleCommand createRectangle) {
+        run { canvas = canvas.draw(createRectangle.execute()) }
     }
 
-    void process(FillWithColourCommand command) {
-        def colourPoint = command.execute()
-        canvas = canvas.fill(colourPoint.coordinate, colourPoint.colour)
+    String process(FillWithColourCommand createColourPoint) {
+        run {
+            def colourPoint = createColourPoint.execute()
+            canvas = canvas.fill(colourPoint.coordinate, colourPoint.colour)
+        }
     }
 
-    void print() {
-        def canvasPresenter = canvas as CanvasPresenter
-        console.print(canvasPresenter.present())
+    private run = { command ->
+        command()
+        (canvas as CanvasPresenter).present()
     }
 }

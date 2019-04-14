@@ -2,6 +2,14 @@
 
 Java 8+
 
-### Running tests
+### Run tests
 
     ./gradlew test
+
+### Build app
+
+    ./gradlew buildApp
+
+### Run app
+
+    java -jar ./build/libs/drawing.jar
