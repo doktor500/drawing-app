@@ -31,7 +31,6 @@ class Cli {
 
     @Command(name = 'C', description = 'Draw a canvas')
     static class DrawCanvas implements Runnable {
-
         @Parameters(index = '0') Integer width
         @Parameters(index = '1') Integer height
 
@@ -43,7 +42,6 @@ class Cli {
 
     @Command(name = 'L', description = 'Draw a line')
     static class DrawLine implements Runnable {
-
         @Parameters(index = '0') Integer coordinate1X
         @Parameters(index = '1') Integer coordinate1Y
         @Parameters(index = '2') Integer coordinate2X
@@ -69,7 +67,6 @@ class Cli {
 
     @Command(name = 'B', description = 'Fill with colour')
     static class Fill implements Runnable {
-
         @Parameters(index = '0') Integer x
         @Parameters(index = '1') Integer y
         @Parameters(index = '2') Character colour

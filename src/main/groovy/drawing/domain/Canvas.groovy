@@ -1,15 +1,16 @@
 package drawing.domain
 
 import groovy.transform.EqualsAndHashCode
+import groovy.transform.TupleConstructor
 
-import static Characters.*
+import static drawing.domain.Characters.*
 
 @EqualsAndHashCode
 class Canvas {
 
-    Integer width = 0
-    Integer height = 0
-    List matrix = []
+    final Integer width
+    final Integer height
+    final List matrix
 
     Canvas(Integer width = 0, Integer height = 0, List matrix = []) {
         this.width = width
@@ -27,7 +28,7 @@ class Canvas {
 
     Canvas fill(Coordinate coordinate, String newColour) {
         def currentColour = matrix[coordinate.y][coordinate.x]
-        def colourInfo = new ColourInfo(currentColour: currentColour, newColour: newColour)
+        def colourInfo = new ColourInfo(currentColour, newColour)
         def coordinates = fillArea(coordinate, colourInfo)
         new Canvas(width, height, createNewMatrix(coordinates, colourInfo.newColour))
     }
@@ -37,31 +38,44 @@ class Canvas {
     }
 
     private List initMatrix() {
-        (0..<height).collect {
-            (0..<width).collect { SPACE }
+        (0 ..< height).collect {
+            (0 ..< width).collect { SPACE }
         }
     }
 
-    private List createNewMatrix(Set coordinates) {
-        (0..<height).collect { row ->
-            (0..<width).collect { column -> (new Coordinate(column, row) in coordinates) ? CROSS : matrix[row][column] }
+    private List createNewMatrix(Set coordinatesToFill, String newValue = CROSS) {
+        (0 ..< height).collect { row ->
+            (0 ..< width).collect { column ->
+                def fillCoordinate = (new Coordinate(column, row) in coordinatesToFill)
+                def currentValue = matrix[row][column]
+                fillCoordinate ? newValue : currentValue
+            }
         }
     }
 
     private Set fillArea(Coordinate currentCoordinate, ColourInfo colourInfo, Set processedCoordinates = []) {
         def neighbors = validNeighbors(currentCoordinate, colourInfo, processedCoordinates)
-        neighbors.inject(processedCoordinates << currentCoordinate) { coordinates, neighbor ->
-            fillArea(neighbor, colourInfo, coordinates + neighbors)
-        }
+        def coordinatesSoFar = processedCoordinates << currentCoordinate
+        neighbors.inject(coordinatesSoFar) { coordinates, next -> fillArea(next, colourInfo, coordinates + neighbors) }
     }
 
     private Set validNeighbors(Coordinate currentCoordinate, ColourInfo colourInfo, Set processedCoordinates) {
-        def neighborsInMatrix = currentCoordinate.neighbors.findAll { it.x in (0..<width) && it.y in (0..<height) }
+        def neighborsInMatrix = currentCoordinate.neighbors.findAll { isCoordinateInMatrix(it) }
         def nonProcessedNeighbors = neighborsInMatrix.findAll { !(it in processedCoordinates) }
-        nonProcessedNeighbors.findAll { matrix[it.y][it.x] == colourInfo.currentColour }
+        def neighborsWithSameColour = nonProcessedNeighbors.findAll { coordinateHasSameColour(it, colourInfo) }
+        neighborsWithSameColour
+    }
+
+    private boolean isCoordinateInMatrix(Coordinate coordinate) {
+        coordinate.x in (0..<width) && coordinate.y in (0..<height)
+    }
+
+    private boolean coordinateHasSameColour(Coordinate coordinate, ColourInfo colourInfo) {
+        matrix[coordinate.y][coordinate.x] == colourInfo.currentColour
     }
 }
 
+@TupleConstructor
 class ColourInfo {
     String currentColour
     String newColour
