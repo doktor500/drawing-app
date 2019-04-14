@@ -29,7 +29,7 @@ class Canvas {
     Canvas fill(Coordinate coordinate, String newColour) {
         def currentColour = matrix[coordinate.y][coordinate.x]
         def colourInfo = new ColourInfo(currentColour, newColour)
-        def coordinates = fillArea(coordinate, colourInfo)
+        def coordinates = colour(coordinate, colourInfo)
         new Canvas(width, height, createNewMatrix(coordinates, colourInfo.newColour))
     }
 
@@ -53,10 +53,10 @@ class Canvas {
         }
     }
 
-    private Set fillArea(Coordinate currentCoordinate, ColourInfo colourInfo, Set processedCoordinates = []) {
+    private Set colour(Coordinate currentCoordinate, ColourInfo colourInfo, Set processedCoordinates = []) {
         def neighbors = validNeighbors(currentCoordinate, colourInfo, processedCoordinates)
         def coordinatesSoFar = processedCoordinates << currentCoordinate
-        neighbors.inject(coordinatesSoFar) { coordinates, next -> fillArea(next, colourInfo, coordinates + neighbors) }
+        neighbors.inject(coordinatesSoFar) { coordinates, next -> colour(next, colourInfo, coordinates + neighbors) }
     }
 
     private Set validNeighbors(Coordinate currentCoordinate, ColourInfo colourInfo, Set processedCoordinates) {
@@ -67,7 +67,7 @@ class Canvas {
     }
 
     private boolean isCoordinateInMatrix(Coordinate coordinate) {
-        coordinate.x in (0..<width) && coordinate.y in (0..<height)
+        coordinate.x in (0 ..< width) && coordinate.y in (0 ..< height)
     }
 
     private boolean coordinateHasSameColour(Coordinate coordinate, ColourInfo colourInfo) {

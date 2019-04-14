@@ -4,7 +4,7 @@ import drawing.DrawingApp
 import drawing.application.commands.CreateCanvasCommand
 import drawing.application.commands.CreateLineCommand
 import drawing.application.commands.CreateRectangleCommand
-import drawing.application.commands.CreateColourCommand
+import drawing.application.commands.AddColourCommand
 import picocli.CommandLine
 import picocli.CommandLine.Command
 import picocli.CommandLine.Parameters
@@ -14,7 +14,7 @@ class Cli {
     private static final PROMPT_MESSAGE = 'enter command: '
     static app = new DrawingApp()
 
-    static void main(String... args) {
+    static void main(String ...args) {
         def scanner = new Scanner(System.in)
         while (true) {
             println(PROMPT_MESSAGE)
@@ -73,7 +73,7 @@ class Cli {
 
         void run() {
             def coordinate = new Tuple(x, y)
-            def command = new CreateColourCommand(coordinate: coordinate, colour: colour)
+            def command = new AddColourCommand(coordinate: coordinate, colour: colour)
             println(app.process(command))
         }
     }

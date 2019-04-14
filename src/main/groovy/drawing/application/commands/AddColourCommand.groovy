@@ -3,7 +3,7 @@ package drawing.application.commands
 import drawing.domain.ColourPoint
 import drawing.domain.Coordinate
 
-class CreateColourCommand implements Command<ColourPoint> {
+class AddColourCommand implements Command<ColourPoint> {
 
     Tuple<Integer> coordinate
     String colour

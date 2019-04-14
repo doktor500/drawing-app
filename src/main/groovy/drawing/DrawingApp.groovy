@@ -3,7 +3,7 @@ package drawing
 import drawing.application.commands.CreateCanvasCommand
 import drawing.application.commands.CreateLineCommand
 import drawing.application.commands.CreateRectangleCommand
-import drawing.application.commands.CreateColourCommand
+import drawing.application.commands.AddColourCommand
 import drawing.application.presenters.CanvasPresenter
 import drawing.domain.Canvas
 
@@ -23,7 +23,7 @@ class DrawingApp {
         run { canvas = canvas.draw(createRectangle.execute()) }
     }
 
-    String process(CreateColourCommand createColour) {
+    String process(AddColourCommand createColour) {
         run {
             def colourPoint = createColour.execute()
             canvas = canvas.fill(colourPoint.coordinate, colourPoint.colour)

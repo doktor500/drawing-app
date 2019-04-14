@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class CreateLineCommandSpec extends Specification {
 
-    void 'creates a new line'() {
+    void 'creates an instance of a create new line command'() {
         given:
         def coordinate1 = new Tuple(1, 2)
         def coordinate2 = new Tuple(6, 2)

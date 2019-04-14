@@ -23,14 +23,14 @@ trait CanvasPresenter {
     }
 
     private printMatrix() {
-        (0..height - 1).collect { column -> printRow(column) }.join(NEW_LINE)
+        (0 ..< height).collect { column -> printRow(column) }.join(NEW_LINE)
     }
 
     private printRow(Integer column) {
-        PIPE + (0..width - 1).collect { row -> matrix[column][row] }.join() + PIPE
+        PIPE + (0 ..< width).collect { row -> matrix[column][row] }.join() + PIPE
     }
 
     private printEdgeRow() {
-        (0..width + 1).collect { SEPARATOR }.join()
+        (0 .. width + 1).collect { SEPARATOR }.join()
     }
 }

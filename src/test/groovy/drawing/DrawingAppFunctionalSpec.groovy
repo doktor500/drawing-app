@@ -3,7 +3,7 @@ package drawing
 import drawing.application.commands.CreateCanvasCommand
 import drawing.application.commands.CreateLineCommand
 import drawing.application.commands.CreateRectangleCommand
-import drawing.application.commands.CreateColourCommand
+import drawing.application.commands.AddColourCommand
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Stepwise
@@ -85,7 +85,7 @@ class DrawingAppFunctionalSpec extends Specification {
         given:
         def coordinate = new Tuple(10, 3)
         def colour = 'o'
-        def command = new CreateColourCommand(coordinate: coordinate, colour: colour)
+        def command = new AddColourCommand(coordinate: coordinate, colour: colour)
 
         expect:
         app.process(command) == format("""

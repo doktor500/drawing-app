@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class CreateCanvasCommandSpec extends Specification {
 
-    void 'creates a new canvas'() {
+    void 'creates an instance of a create canvas command'() {
         given:
         def (width, height) = [0, 0]
         def command = new CreateCanvasCommand(width: width, height: height)

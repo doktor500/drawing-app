@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 class CreateRectangleCommandSpec extends Specification {
 
-    void 'creates a new rectangle'() {
+    void 'creates an instance of a new create rectangle command'() {
         given:
         def coordinate1 = new Tuple(16, 1)
         def coordinate2 = new Tuple(20, 3)
