@@ -15,4 +15,16 @@ class LineSpec extends Specification {
             new Coordinate(0, 2)
         ] as Set
     }
+
+    void 'returns diagonal line coordinates'() {
+        given:
+        def line = new Line(new Coordinate(0, 0), new Coordinate(2, 2))
+
+        expect:
+        line.coordinates == [
+            new Coordinate(0, 0),
+            new Coordinate(1, 1),
+            new Coordinate(2, 2)
+        ] as Set
+    }
 }

@@ -1,9 +1,9 @@
 package drawing
 
+import drawing.application.commands.AddColourCommand
 import drawing.application.commands.CreateCanvasCommand
 import drawing.application.commands.CreateLineCommand
 import drawing.application.commands.CreateRectangleCommand
-import drawing.application.commands.AddColourCommand
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Stepwise
@@ -18,6 +18,40 @@ class DrawingAppFunctionalSpec extends Specification {
     void 'draws a canvas'() {
         given:
         def command = new CreateCanvasCommand(width: 20, height: 4)
+
+        expect:
+        app.process(command) == format("""
+            ----------------------
+            |                    |
+            |                    |
+            |                    |
+            |                    |
+            ----------------------
+        """)
+    }
+
+    void 'creates a diagonal line'() {
+        given:
+        def coordinate1 = new Tuple(1, 1)
+        def coordinate2 = new Tuple(4, 4)
+        def command = new CreateLineCommand(coordinate1: coordinate1, coordinate2: coordinate2)
+
+        expect:
+        app.process(command) == format("""
+            ----------------------
+            |X                   |
+            | X                  |
+            |  X                 |
+            |   X                |
+            ----------------------
+        """)
+    }
+
+    void 'removes the line'() {
+        given:
+        def coordinate = new Tuple(1, 1)
+        def colour = ' '
+        def command = new AddColourCommand(coordinate: coordinate, colour: colour)
 
         expect:
         app.process(command) == format("""
@@ -100,32 +134,42 @@ class DrawingAppFunctionalSpec extends Specification {
 
     void 'draws a bigger canvas'() {
         given:
-        def command = new CreateCanvasCommand(width: 60, height: 20)
+        def command = new CreateCanvasCommand(width: 30, height: 30)
 
         expect:
         app.process(command) == format("""
-            --------------------------------------------------------------
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            |                                                            |
-            --------------------------------------------------------------
+            --------------------------------
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            --------------------------------
         """)
     }
 
@@ -137,28 +181,38 @@ class DrawingAppFunctionalSpec extends Specification {
 
         expect:
         app.process(command) == format("""
-            --------------------------------------------------------------
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
-            --------------------------------------------------------------
+            --------------------------------
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooo|
+            --------------------------------
         """)
     }
 }
