@@ -27,6 +27,11 @@ class Canvas {
         rectangle.lines.inject(this) { canvas, line -> canvas.draw(line) }
     }
 
+    //TODO remove duplication, introduce shape?
+    Canvas draw(Triangle triangle) {
+        triangle.lines.inject(this) { canvas, line -> canvas.draw(line) }
+    }
+
     Canvas fill(Coordinate coordinate, String newColour) {
         def currentColour = matrix[coordinate.y][coordinate.x]
         def colourInfo = new ColourInfo(currentColour, newColour)

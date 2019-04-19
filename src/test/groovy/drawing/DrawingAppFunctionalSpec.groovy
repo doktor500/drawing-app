@@ -4,6 +4,7 @@ import drawing.application.commands.AddColourCommand
 import drawing.application.commands.CreateCanvasCommand
 import drawing.application.commands.CreateLineCommand
 import drawing.application.commands.CreateRectangleCommand
+import drawing.application.commands.CreateTriangleCommand
 import spock.lang.Shared
 import spock.lang.Specification
 import spock.lang.Stepwise
@@ -173,45 +174,46 @@ class DrawingAppFunctionalSpec extends Specification {
         """)
     }
 
-    void 'fills full canvas with colour'() {
+    void 'draws a triangle'() {
         given:
-        def coordinate = new Tuple(1, 1)
-        def colour = 'o'
-        def command = new AddColourCommand(coordinate: coordinate, colour: colour)
+        def coordinate1 = new Tuple(1, 1)
+        def coordinate2 = new Tuple(6, 6)
+        def coordinate3 = new Tuple(6, 1)
+        def command = new CreateTriangleCommand(coordinate1, coordinate2, coordinate3)
 
         expect:
         app.process(command) == format("""
             --------------------------------
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
-            |oooooooooooooooooooooooooooooo|
+            |                              |
+            | XXXXXX                       |
+            |  X   X                       |
+            |   X  X                       |
+            |    X X                       |
+            |     XX                       |
+            |      X                       |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
+            |                              |
             --------------------------------
         """)
     }

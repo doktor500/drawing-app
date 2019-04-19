@@ -4,6 +4,7 @@ import drawing.application.commands.CreateCanvasCommand
 import drawing.application.commands.CreateLineCommand
 import drawing.application.commands.CreateRectangleCommand
 import drawing.application.commands.AddColourCommand
+import drawing.application.commands.CreateTriangleCommand
 import drawing.application.presenters.CanvasPresenter
 import drawing.domain.Canvas
 
@@ -21,6 +22,10 @@ class DrawingApp {
 
     String process(CreateRectangleCommand createRectangle) {
         run { canvas = canvas.draw(createRectangle.execute()) }
+    }
+
+    String process(CreateTriangleCommand createTriangle) {
+        run { canvas = canvas.draw(createTriangle.execute()) }
     }
 
     String process(AddColourCommand createColour) {

@@ -58,6 +58,34 @@ class CanvasSpec extends Specification {
             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         ]
     }
+    
+    void 'draws a triangle in a canvas'() {
+        given:
+        def canvas = new Canvas(20, 8)
+        def coordinate1 = new Tuple(1, 1)
+        def coordinate2 = new Tuple(6, 6)
+        def coordinate3 = new Tuple(1, 6)
+        def triangle = new Triangle([
+            new Line(Coordinate.fromTuple(coordinate1), Coordinate.fromTuple(coordinate2)),
+            new Line(Coordinate.fromTuple(coordinate2), Coordinate.fromTuple(coordinate3)),
+            new Line(Coordinate.fromTuple(coordinate3), Coordinate.fromTuple(coordinate1))
+        ] as Set)
+
+        when:
+        def newCanvas = canvas.draw(triangle)
+
+        then:
+        newCanvas.matrix == [
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'X', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'X', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'X', ' ', ' ', ' ', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', 'X', 'X', 'X', 'X', 'X', 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+            [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+        ]
+    }
 
     void 'fills empty canvas with colour'() {
         given:

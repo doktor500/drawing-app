@@ -21,4 +21,9 @@ class CoordinateSpec extends Specification {
             new Coordinate(2, 2)
         ] as Set
     }
+
+    void 'creates a coordinate from a tuple of integers'() {
+        expect:
+        Coordinate.fromTuple(new Tuple(1, 1)) == new Coordinate(1, 1)
+    }
 }

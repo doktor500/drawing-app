@@ -17,4 +17,8 @@ class Coordinate {
     String toString() {
         "($x, $y)"
     }
+
+    static fromTuple(Tuple<Integer> coordinate) {
+        new Coordinate(coordinate.first(), coordinate.last())
+    }
 }
