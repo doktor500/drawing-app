@@ -2,7 +2,7 @@ package drawing.application.commands
 
 import drawing.domain.Coordinate
 import drawing.domain.Line
-import drawing.domain.Rectangle
+import drawing.domain.Shape
 import spock.lang.Specification
 
 class CreateRectangleCommandSpec extends Specification {
@@ -17,7 +17,7 @@ class CreateRectangleCommandSpec extends Specification {
         command.execute() == expectedRectangle
 
         where:
-        expectedRectangle = new Rectangle([
+        expectedRectangle = new Shape([
             new Line(new Coordinate(15, 0), new Coordinate(15, 2)),
             new Line(new Coordinate(15, 0), new Coordinate(19, 0)),
             new Line(new Coordinate(19, 0), new Coordinate(19, 2)),

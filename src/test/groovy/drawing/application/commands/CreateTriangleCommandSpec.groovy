@@ -2,7 +2,7 @@ package drawing.application.commands
 
 import drawing.domain.Coordinate
 import drawing.domain.Line
-import drawing.domain.Triangle
+import drawing.domain.Shape
 import spock.lang.Specification
 
 class CreateTriangleCommandSpec extends Specification {
@@ -15,7 +15,7 @@ class CreateTriangleCommandSpec extends Specification {
         def command = new CreateTriangleCommand(coordinate1, coordinate2, coordinate3)
 
         expect:
-        command.execute() == new Triangle([
+        command.execute() == new Shape([
             new Line(Coordinate.fromTuple(coordinate1), Coordinate.fromTuple(coordinate2)),
             new Line(Coordinate.fromTuple(coordinate2), Coordinate.fromTuple(coordinate3)),
             new Line(Coordinate.fromTuple(coordinate3), Coordinate.fromTuple(coordinate1))

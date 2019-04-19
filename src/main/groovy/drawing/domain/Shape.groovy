@@ -5,6 +5,6 @@ import groovy.transform.TupleConstructor
 
 @EqualsAndHashCode
 @TupleConstructor
-class Rectangle {
+class Shape {
     Set<Line> lines
 }

@@ -40,7 +40,7 @@ class CanvasSpec extends Specification {
     void 'draws a rectangle in a canvas'() {
         given:
         def canvas = new Canvas(20, 4)
-        def rectangle = new Rectangle([
+        def rectangle = new Shape([
             new Line(new Coordinate(15, 0), new Coordinate(15, 2)),
             new Line(new Coordinate(15, 0), new Coordinate(19, 0)),
             new Line(new Coordinate(19, 0), new Coordinate(19, 2)),
@@ -65,7 +65,7 @@ class CanvasSpec extends Specification {
         def coordinate1 = new Tuple(1, 1)
         def coordinate2 = new Tuple(6, 6)
         def coordinate3 = new Tuple(1, 6)
-        def triangle = new Triangle([
+        def triangle = new Shape([
             new Line(Coordinate.fromTuple(coordinate1), Coordinate.fromTuple(coordinate2)),
             new Line(Coordinate.fromTuple(coordinate2), Coordinate.fromTuple(coordinate3)),
             new Line(Coordinate.fromTuple(coordinate3), Coordinate.fromTuple(coordinate1))

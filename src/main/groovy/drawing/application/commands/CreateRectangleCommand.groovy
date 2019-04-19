@@ -2,19 +2,19 @@ package drawing.application.commands
 
 import drawing.domain.Coordinate
 import drawing.domain.Line
-import drawing.domain.Rectangle
+import drawing.domain.Shape
 
-class CreateRectangleCommand implements Command<Rectangle> {
+class CreateRectangleCommand implements Command<Shape> {
 
     Tuple<Integer> coordinate1
     Tuple<Integer> coordinate2
 
     @Override
-    Rectangle execute() {
+    Shape execute() {
         def origin = new Coordinate(x: coordinate1.first() - 1, y: coordinate1.last() - 1)
         def destination = new Coordinate(x: coordinate2.first() - 1, y: coordinate2.last() - 1)
         def lines = (1..4).collect { "line${it}"(origin, destination) } as Set
-        new Rectangle(lines)
+        new Shape(lines)
     }
 
     private Line line1(Coordinate origin, Coordinate destination) {

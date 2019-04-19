@@ -23,13 +23,8 @@ class Canvas {
         new Canvas(width, height, createNewMatrix(line.coordinates))
     }
 
-    Canvas draw(Rectangle rectangle) {
-        rectangle.lines.inject(this) { canvas, line -> canvas.draw(line) }
-    }
-
-    //TODO remove duplication, introduce shape?
-    Canvas draw(Triangle triangle) {
-        triangle.lines.inject(this) { canvas, line -> canvas.draw(line) }
+    Canvas draw(Shape shape) {
+        shape.lines.inject(this) { canvas, line -> canvas.draw(line) }
     }
 
     Canvas fill(Coordinate coordinate, String newColour) {
