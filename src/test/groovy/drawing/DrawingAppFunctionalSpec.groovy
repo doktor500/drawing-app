@@ -97,4 +97,68 @@ class DrawingAppFunctionalSpec extends Specification {
             ----------------------
         """)
     }
+
+    void 'draws a bigger canvas'() {
+        given:
+        def command = new CreateCanvasCommand(width: 60, height: 20)
+
+        expect:
+        app.process(command) == format("""
+            --------------------------------------------------------------
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            |                                                            |
+            --------------------------------------------------------------
+        """)
+    }
+
+    void 'fills full canvas with colour'() {
+        given:
+        def coordinate = new Tuple(1, 1)
+        def colour = 'o'
+        def command = new AddColourCommand(coordinate: coordinate, colour: colour)
+
+        expect:
+        app.process(command) == format("""
+            --------------------------------------------------------------
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+            --------------------------------------------------------------
+        """)
+    }
 }

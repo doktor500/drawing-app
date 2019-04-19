@@ -1,6 +1,7 @@
 package drawing.domain
 
 import groovy.transform.EqualsAndHashCode
+import groovy.transform.TailRecursive
 import groovy.transform.TupleConstructor
 
 import static drawing.domain.Characters.*
@@ -29,7 +30,7 @@ class Canvas {
     Canvas fill(Coordinate coordinate, String newColour) {
         def currentColour = matrix[coordinate.y][coordinate.x]
         def colourInfo = new ColourInfo(currentColour, newColour)
-        def coordinates = colour(coordinate, colourInfo)
+        def coordinates = colour(colourInfo, [coordinate] as Set)
         new Canvas(width, height, createNewMatrix(coordinates, colourInfo.newColour))
     }
 
@@ -53,10 +54,13 @@ class Canvas {
         }
     }
 
-    private Set colour(Coordinate currentCoordinate, ColourInfo colourInfo, Set processedCoordinates = []) {
+    @TailRecursive
+    private Set colour(ColourInfo colourInfo, Set remainingCoordinates, Set processedCoordinates = []) {
+        if (remainingCoordinates.empty) return processedCoordinates
+        def currentCoordinate = remainingCoordinates.find()
         def neighbors = validNeighbors(currentCoordinate, colourInfo, processedCoordinates)
         def coordinatesSoFar = processedCoordinates << currentCoordinate
-        neighbors.inject(coordinatesSoFar) { coordinates, next -> colour(next, colourInfo, coordinates + neighbors) }
+        colour(colourInfo, remainingCoordinates - currentCoordinate + neighbors, coordinatesSoFar)
     }
 
     private Set validNeighbors(Coordinate currentCoordinate, ColourInfo colourInfo, Set processedCoordinates) {
